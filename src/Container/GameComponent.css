@@ -12,7 +12,7 @@ button {
 .btnPlay {
     background-color: rgb(0, 123, 255);
     margin-right: 10px;
-
+    cursor: pointer;
 }
 .btnInactive {
     margin-right: 10px;
@@ -24,6 +24,7 @@ button {
 .btnStop {
     background-color: #e7e7e7; 
     color: black;
+    cursor: pointer;
 }
 form {
     width: 300px;
