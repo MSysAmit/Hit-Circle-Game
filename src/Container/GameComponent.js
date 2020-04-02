@@ -5,7 +5,7 @@
 
 
 import React, {Component} from 'react';
-
+import "./GameComponent.css";
 /** tableRow and tableData objects are created for Table Row and Table data **/
 
 const tableRow = [{ id: 'r1', row: 1}, { id: 'r2', row: 2}, { id: 'r3', row: 3}, { id: 'r4', row: 4}, { id: 'r5', row: 5}, { id: 'r6', row: 6}];
@@ -85,7 +85,6 @@ class GameComponent extends Component {
     /** function for handle play button **/
     handlePlay() {
         if (this.state.playStatus) {
-            this.handleStop();
             return;
         }
         this.setState({
@@ -98,6 +97,9 @@ class GameComponent extends Component {
 
     /** function for handle pause button **/
     handleStop(){
+        if(!this.state.playStatus){
+            return;
+        }
         this.setState({
             playStatus: false,
             totalHits: 0
@@ -108,16 +110,15 @@ class GameComponent extends Component {
 
     /** render the component on the screen **/
     render(){
-        const {totalHits} = this.state;
+        const {totalHits, playStatus} = this.state;
         return(
             <div>
                 <h4>Hit the circle</h4>
-                <p>Test your skill how many circle you can hit?</p>
-                <div>
-                    <span>Score</span>
-                    <input value={totalHits}/>
+                <p className="pClass">Test your skill how many circle you can hit?</p>
+                <div className="scoreDivClass">
+                    <span>Score: </span>
+                    <input className="scoreInputClass" readOnly value={totalHits}/>
                 </div>
-                <br/>
                 <form name="dmz">
                 <table>
                     <tbody>
@@ -135,8 +136,17 @@ class GameComponent extends Component {
                     </tbody>
                 </table>
                 </form>
-                <button onClick={this.handlePlay}>Play</button>
-                <button onClick={this.handleStop}>Stop</button>
+                <button className={playStatus ? "btnPlay" : 'btnInactive' } onClick={this.handlePlay}>Play</button>
+                
+                <button className="btnStop" onClick={this.handleStop}>Stop</button>
+
+                <div className="instructionClass">
+                    <p>Instructtions:</p>
+                    <p>1. Press Play buttn to start the game.</p>
+                    <p>2. Click on the circles as they are selected randomly by the computer.</p>
+                    <p>3. 1 point per hit. minus 1 per miss.</p>
+                    <p>4. Stop the game by pressing stop button.</p>
+                </div>
             </div>
         )
     }
